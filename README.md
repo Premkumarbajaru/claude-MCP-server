@@ -5,7 +5,7 @@
 
 A reliable MCP server providing real-time weather data integration with Claude for Desktop.
 
-![Weather Server Architecture]()
+![Weather Server Architecture](https://modelcontextprotocol.io/introduction)
 
 ## ✨ Features
 
