@@ -1,4 +1,3 @@
-Sure! Here's your GitHub `README.md` file, formatted and ready to copy and paste:
 
 ```markdown
 # 🌦️ MCP Weather Server
