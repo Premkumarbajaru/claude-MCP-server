@@ -1,6 +1,3 @@
-
-
-```markdown
 # 🌦️ MCP Weather Server
 
 A reliable MCP server providing real-time weather data integration with Claude for Desktop.
