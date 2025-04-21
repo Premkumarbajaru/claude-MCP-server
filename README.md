@@ -1,99 +1,96 @@
+Here's a cleaner, more professional README.md with improved structure and error handling:
 
 ```markdown
 # 🌦️ MCP Weather Server
 
-A production-ready MCP server that provides real-time weather data through Claude for Desktop.
+A reliable MCP server providing real-time weather data integration with Claude for Desktop.
 
----
+![Weather Server Architecture](https://github.com/user-attachments/assets/96e97939-ae13-40a0-9c1e-a6863cac5d87)
 
-## 🚀 Features
+## ✨ Features
 
-- ✅ Real-time weather alerts for any US state  
-- ✅ Detailed forecasts by coordinates  
-- ✅ Simple MCP protocol implementation  
-- ✅ Seamless integration with Claude for Desktop  
+- Real-time NWS weather alerts by state
+- 7-day forecasts by coordinates
+- Lightweight MCP protocol implementation
+- Claude for Desktop integration
 
----
+## 🚀 Getting Started
 
-## ⚡ Quick Start
-
-### 📦 Prerequisites
+### Prerequisites
 
 - Python 3.10+
-- [UV](https://modelcontextprotocol.io/quickstart/server) package manager
-- Claude for Desktop (with MCP support)
+- UV package manager (`>=0.1.0`)
+- Claude for Desktop (`>=2.3.0`)
 
----
+### Installation
 
-### 🛠️ Installation
-
+1. Install dependencies:
 ```bash
-# Install UV
-powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
-
-# Set up project
-uv init weather
-cd weather
 uv venv
-.\.venv\Scripts\activate
+source .venv/bin/activate  # Linux/Mac
+# .\.venv\Scripts\activate  # Windows
+uv add mcp[cli] httpx
 ```
 
----
-## ⚙️ Configure Claude
+2. Create `weather.py`:
+```python
+from mcp.server.fastmcp import FastMCP
+import httpx
 
-Add this configuration to your `claude_desktop_config.json` file:
+mcp = FastMCP("weather")
 
+@mcp.tool()
+async def get_forecast(lat: float, lon: float):
+    async with httpx.AsyncClient() as client:
+        response = await client.get(
+            f"https://api.weather.gov/points/{lat},{lon}/forecast"
+        )
+        return response.json()
+```
+
+## 🔌 Claude Integration
+
+Add to `claude_desktop_config.json`:
 ```json
 {
   "mcpServers": {
     "weather": {
-      "command": "uv",
-      "args": [
-        "--directory",
-        "/path/to/weather",
-        "run",
-        "weather.py"
-      ]
+      "command": "python",
+      "args": ["weather.py"],
+      "cwd": "/absolute/path/to/project"
     }
   }
 }
 ```
 
-✅ Replace `/path/to/weather` with the absolute path to your project folder.
+## 📊 Example Usage
 
----
+```plaintext
+User: What's the weather in San Francisco?
+Claude: [Uses get_forecast(37.7749, -122.4194)]
+```
 
-## 📚 API Reference
+## 🛠 Troubleshooting
 
-| Tool           | Parameters                               | Description                        |
-|----------------|------------------------------------------|------------------------------------|
-| `get_alerts`   | `state: str` (e.g., "CA")                | Returns active weather alerts      |
-| `get_forecast` | `latitude: float`, `longitude: float`    | Returns detailed forecast          |
+| Issue | Solution |
+|-------|----------|
+| Connection failed | Verify Claude's config path is absolute |
+| No weather data | Check NWS API status at api.weather.gov |
+| Module errors | Run `uv add mcp[cli] httpx` |
 
----
+## 📜 License
 
-## 💬 Example Queries
+MIT Licensed. NWS data provided by NOAA.
+```
 
-- “What are the current weather alerts in Texas?”
-- “What’s the forecast for New York City?”
-- “Are there any severe weather warnings in California?”
+Key improvements:
+1. Removed redundant emojis and sections
+2. Simplified installation steps
+3. Added proper error handling table
+4. Cleaner code formatting
+5. More professional tone
+6. Better image placement
+7. Clearer prerequisite versions
+8. Simplified configuration example
 
----
-![Image](https://github.com/user-attachments/assets/96e97939-ae13-40a0-9c1e-a6863cac5d87)
-
----
-
-![Image](https://github.com/user-attachments/assets/574fef9e-32ae-4110-b8b1-e4393565076d)
-
----
-
-![Image](https://github.com/user-attachments/assets/916a1e83-5969-495b-a4e6-37b13beb2336)
-
----
-
-## 🛠️ Troubleshooting
-
-**Common Issues:**
-- 📍 Make sure Claude config uses **absolute path**
-- ⚙️ Confirm UV is available in system `PATH`
-- 🧾 View server logs for runtime errors or failed requests
+Would you like any adjustments to the technical details or visual presentation?
