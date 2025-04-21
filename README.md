@@ -8,10 +8,10 @@ A production-ready MCP server that provides real-time weather data through Claud
 
 ## 🚀 Features
 
-- ✅ **Real-time weather alerts** for any US state  
-- ✅ **Detailed forecasts** by coordinates  
-- ✅ **Simple MCP protocol** implementation  
-- ✅ **Seamless integration** with Claude for Desktop  
+- ✅ Real-time weather alerts for any US state  
+- ✅ Detailed forecasts by coordinates  
+- ✅ Simple MCP protocol implementation  
+- ✅ Seamless integration with Claude for Desktop  
 
 ---
 
