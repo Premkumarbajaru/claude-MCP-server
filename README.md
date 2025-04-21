@@ -1,11 +1,11 @@
-Here's a cleaner, more professional README.md with improved structure and error handling:
+
 
 ```markdown
 # 🌦️ MCP Weather Server
 
 A reliable MCP server providing real-time weather data integration with Claude for Desktop.
 
-![Weather Server Architecture](https://github.com/user-attachments/assets/96e97939-ae13-40a0-9c1e-a6863cac5d87)
+![Weather Server Architecture]()
 
 ## ✨ Features
 
@@ -19,34 +19,18 @@ A reliable MCP server providing real-time weather data integration with Claude f
 ### Prerequisites
 
 - Python 3.10+
-- UV package manager (`>=0.1.0`)
-- Claude for Desktop (`>=2.3.0`)
+- UV package manager
+- Claude for Desktop
 
 ### Installation
 
 1. Install dependencies:
 ```bash
 uv venv
-source .venv/bin/activate  # Linux/Mac
-# .\.venv\Scripts\activate  # Windows
-uv add mcp[cli] httpx
+.\.venv\Scripts\activate
 ```
 
 2. Create `weather.py`:
-```python
-from mcp.server.fastmcp import FastMCP
-import httpx
-
-mcp = FastMCP("weather")
-
-@mcp.tool()
-async def get_forecast(lat: float, lon: float):
-    async with httpx.AsyncClient() as client:
-        response = await client.get(
-            f"https://api.weather.gov/points/{lat},{lon}/forecast"
-        )
-        return response.json()
-```
 
 ## 🔌 Claude Integration
 
@@ -69,6 +53,11 @@ Add to `claude_desktop_config.json`:
 User: What's the weather in San Francisco?
 Claude: [Uses get_forecast(37.7749, -122.4194)]
 ```
+![Image](https://github.com/user-attachments/assets/96e97939-ae13-40a0-9c1e-a6863cac5d87)
+
+![Image](https://github.com/user-attachments/assets/574fef9e-32ae-4110-b8b1-e4393565076d)
+
+![Image](https://github.com/user-attachments/assets/916a1e83-5969-495b-a4e6-37b13beb2336)
 
 ## 🛠 Troubleshooting
 
@@ -77,20 +66,3 @@ Claude: [Uses get_forecast(37.7749, -122.4194)]
 | Connection failed | Verify Claude's config path is absolute |
 | No weather data | Check NWS API status at api.weather.gov |
 | Module errors | Run `uv add mcp[cli] httpx` |
-
-## 📜 License
-
-MIT Licensed. NWS data provided by NOAA.
-```
-
-Key improvements:
-1. Removed redundant emojis and sections
-2. Simplified installation steps
-3. Added proper error handling table
-4. Cleaner code formatting
-5. More professional tone
-6. Better image placement
-7. Clearer prerequisite versions
-8. Simplified configuration example
-
-Would you like any adjustments to the technical details or visual presentation?
